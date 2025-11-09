@@ -55,7 +55,7 @@ kT = (
 )  # Initial temperature (300 K)
 target_pressure = torch.tensor(
     10_000 * Units.pressure, device=device, dtype=dtype
-)  # Target pressure (0 bar)
+)  # Target pressure (10 kbar)
 
 state = ts.nvt_nose_hoover_init(model=model, state=state, kT=kT, dt=dt, seed=1)
 

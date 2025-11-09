@@ -49,7 +49,7 @@ results = model(state)
 SMOKE_TEST = os.getenv("CI") is not None
 N_steps_nvt = 20 if SMOKE_TEST else 2_000
 N_steps_npt = 20 if SMOKE_TEST else 2_000
-dt = 0.001 * Units.time  # Time step (1 ps)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Time step (1 ps)  # Time step (1 ps)
 kT = (
     torch.tensor(300, device=device, dtype=dtype) * Units.temperature
 )  # Initial temperature (300 K)
@@ -57,7 +57,7 @@ target_pressure = torch.tensor(
     0.0 * Units.pressure, device=device, dtype=dtype
 )  # Target pressure (0 bar)
 
-state = ts.npt_nose_hoover_init(state=state, model=model, kT=kT, dt=torch.tensor(dt))
+state = ts.npt_nose_hoover_init(state=state, model=model, kT=kT, dt=dt)
 
 for step in range(N_steps_nvt):
     if step % 10 == 0:
@@ -74,12 +74,12 @@ for step in range(N_steps_nvt):
     state = ts.npt_nose_hoover_step(
         state=state,
         model=model,
-        dt=torch.tensor(dt),
+        dt=dt,
         kT=kT,
         external_pressure=target_pressure,
     )
 
-state = ts.npt_nose_hoover_init(state=state, model=model, kT=kT, dt=torch.tensor(dt))
+state = ts.npt_nose_hoover_init(state=state, model=model, kT=kT, dt=dt)
 
 for step in range(N_steps_npt):
     if step % 10 == 0:
@@ -107,7 +107,7 @@ for step in range(N_steps_npt):
     state = ts.npt_nose_hoover_step(
         state=state,
         model=model,
-        dt=torch.tensor(dt),
+        dt=dt,
         kT=kT,
         external_pressure=target_pressure,
     )

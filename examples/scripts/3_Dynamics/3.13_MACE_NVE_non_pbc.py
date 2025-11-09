@@ -55,7 +55,7 @@ results = model(state)
 kT = (
     torch.tensor(300, device=device, dtype=dtype) * Units.temperature
 )  # Initial temperature (K)
-dt = torch.tensor(0.002 * Units.time, device=device, dtype=dtype)  # Timestep (ps)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Timestep (1 ps)
 
 
 # Initialize NVE integrator

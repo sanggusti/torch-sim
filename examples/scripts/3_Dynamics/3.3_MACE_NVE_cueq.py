@@ -54,7 +54,7 @@ results = model(state)
 
 # Setup NVE MD simulation parameters
 kT = torch.tensor(1000, device=device, dtype=dtype) * Units.temperature
-dt = torch.tensor(0.002 * Units.time, device=device, dtype=dtype)  # Timestep (ps)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Time step (1 ps)
 
 
 # Initialize NVE integrator

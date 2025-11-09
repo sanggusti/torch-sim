@@ -133,7 +133,7 @@ state = ts.io.atoms_to_state(fcc_lattice, device=device, dtype=dtype)
 results = model(state)
 
 # Set up simulation parameters
-dt = torch.tensor(0.002 * Units.time, device=device, dtype=dtype)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Time step (1 ps)
 kT = torch.tensor(init_temp, device=device, dtype=dtype) * Units.temperature
 
 state = ts.nvt_nose_hoover_init(model=model, state=state, kT=kT, dt=dt, seed=1)

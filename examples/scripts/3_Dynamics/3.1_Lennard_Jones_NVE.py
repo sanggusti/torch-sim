@@ -99,8 +99,8 @@ results = model(state)
 # Set up NVE simulation
 # kT: initial temperature in metal units (K)
 # dt: timestep in metal units (ps)
-kT = torch.tensor(80 * Units.temperature, device=device, dtype=dtype)
-dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)
+kT = torch.tensor(80 * Units.temperature, device=device, dtype=dtype) # 80 kelvin
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype) # Time step 1 ps
 
 # Initialize NVE integrator
 state = ts.nve_init(state=state, model=model, kT=kT, seed=1)

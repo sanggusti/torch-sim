@@ -57,7 +57,7 @@ state = ts.SimState(
     positions=positions, masses=masses, cell=cell, atomic_numbers=atomic_numbers, pbc=True
 )
 
-dt = torch.tensor(0.002 * Units.time, device=device, dtype=dtype)  # Timestep (ps)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Time step (1 ps)
 kT = torch.tensor(1000, device=device, dtype=dtype) * Units.temperature
 gamma = torch.tensor(
     10 / Units.time, device=device, dtype=dtype

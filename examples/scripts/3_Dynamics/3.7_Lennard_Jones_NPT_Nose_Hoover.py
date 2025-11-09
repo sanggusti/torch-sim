@@ -103,7 +103,7 @@ kT = torch.tensor(
 )  # Temperature (200 K)
 target_pressure = (
     torch.tensor(10, device=device, dtype=dtype) * Units.pressure
-)  # Target pressure (10 kbar)
+)  # Target pressure (10 bar)
 
 state = ts.npt_nose_hoover_init(
     state=state,
@@ -130,7 +130,7 @@ for step in range(N_steps):
         e_kin = ts.calc_kinetic_energy(
             masses=state.masses, momenta=state.momenta, system_idx=state.system_idx
         )
-        pressure = ts.get_pressure(
+        pressure = ts.quantities.get_pressure(
             model(state)["stress"], e_kin, torch.det(state.current_cell)
         )
         pressure = float(pressure) / Units.pressure

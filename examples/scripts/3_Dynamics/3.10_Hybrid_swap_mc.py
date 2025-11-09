@@ -90,7 +90,7 @@ rng = torch.Generator(device=device)
 rng.manual_seed(42)
 
 n_steps = 100
-dt = torch.tensor(0.002)
+dt = torch.tensor(0.001 * Units.time, device=device, dtype=dtype)  # Time step (1 ps)
 for step in range(n_steps):
     if step % 10 == 0:
         hybrid_state = ts.swap_mc_step(state=hybrid_state, model=model, kT=kT, rng=rng)
